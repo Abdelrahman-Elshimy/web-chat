@@ -10,17 +10,17 @@ const userSchema = mongoose.Schema({
         type: String,
         default: "default.png"
     },
-    isOnline: {type: Boolean, default: false},
+    isOnline: { type: Boolean, default: false },
     friends: {
-        type: [{name: String, image: String, id: String}],
+        type: [{ name: String, image: String, id: String }],
         default: []
     },
     friendRequests: {
-        type: [{name: String, id: String}],
+        type: [{ name: String, id: String }],
         default: []
     },
     sendRequests: {
-        type: [{name: String, id: String}],
+        type: [{ name: String, id: String }],
         default: []
     },
 });
@@ -68,8 +68,7 @@ exports.loging = (req) => {
                     }
                     else {
                         resolve({
-                            id: user._id,
-                            isAdmin: user.isAdmin
+                            user: user
                         });
                         mongoose.disconnect();
                     }
@@ -93,7 +92,7 @@ exports.loging = (req) => {
 exports.getUser = id => {
     return new Promise((resolve, reject) => {
         mongoose.connect(DB_URL, { useNewUrlParser: true }).then(() => {
-            return userModel.findOne({_id: id})
+            return userModel.findOne({ _id: id })
         }).then((user) => {
             resolve(user);
             mongoose.disconnect();
@@ -102,4 +101,118 @@ exports.getUser = id => {
             mongoose.disconnect();
         });
     });
+}
+
+
+exports.sendFriendRequest = async (data) => {
+    try {
+        await mongoose.connect(DB_URL, { useNewUrlParser: true })
+        await userModel.updateOne({ _id: data.friendId }, {
+            $push: {
+                friendRequests: { name: data.myName, id: data.myId }
+            }
+        })
+        await userModel.updateOne({ _id: data.myId }, {
+            $push: {
+                sendRequests: { name: data.friendName, id: data.friendId }
+            }
+        })
+        mongoose.disconnect();
+        return;
+    } catch (error) {
+        mongoose.disconnect();
+        throw new Error(error);
+    }
+}
+exports.cancelFriendRequest = async (data) => {
+    try {
+        await mongoose.connect(DB_URL, { useNewUrlParser: true })
+        await userModel.updateOne({ _id: data.friendId }, {
+            $pull: {
+                friendRequests: { id: data.myId }
+            }
+        })
+        await userModel.updateOne({ _id: data.myId }, {
+            $pull: {
+                sendRequests: { id: data.friendId }
+            }
+        })
+        mongoose.disconnect();
+        return;
+    } catch (error) {
+        mongoose.disconnect();
+        throw new Error(error);
+    }
+}
+exports.rejectFriendRequest = async (data) => {
+    try {
+        await mongoose.connect(DB_URL, { useNewUrlParser: true })
+        await userModel.updateOne({ _id: data.friendId }, {
+            $pull: {
+                sendRequests: { id: data.myId }
+            }
+        })
+        await userModel.updateOne({ _id: data.myId }, {
+            $pull: {
+                friendRequests: { id: data.friendId }
+            }
+        })
+        mongoose.disconnect();
+        return;
+    } catch (error) {
+        mongoose.disconnect();
+        throw new Error(error);
+    }
+}
+exports.acceptFriendRequest = async (data) => {
+    try {
+        await mongoose.connect(DB_URL, { useNewUrlParser: true })
+        await userModel.updateOne({ _id: data.friendId }, {
+            $pull: {
+                sendRequests: { id: data.myId }
+            }
+        })
+        await userModel.updateOne({ _id: data.myId }, {
+            $pull: {
+                friendRequests: { id: data.friendId }
+            }
+        })
+
+        await userModel.updateOne({ _id: data.myId }, {
+            $push: {
+                friends: { name: data.friendName, id: data.friendId, image: data.friendImage }
+            }
+        })
+        await userModel.updateOne({ _id: data.friendId }, {
+            $push: {
+                friends: { name: data.myName, id: data.myId, image: data.myImage }
+            }
+        })
+        mongoose.disconnect();
+        return;
+    } catch (error) {
+        mongoose.disconnect();
+        throw new Error(error);
+    }
+}
+exports.deleteFriend = async (data) => {
+    try {
+        await mongoose.connect(DB_URL, { useNewUrlParser: true })
+
+        await userModel.updateOne({ _id: data.myId }, {
+            $pull: {
+                friends: { id: data.friendId }
+            }
+        })
+        await userModel.updateOne({ _id: data.friendId }, {
+            $pull: {
+                friends: { id: data.myId }
+            }
+        })
+        mongoose.disconnect();
+        return;
+    } catch (error) {
+        mongoose.disconnect();
+        throw new Error(error);
+    }
 }

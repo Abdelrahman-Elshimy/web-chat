@@ -47,8 +47,9 @@ exports.goToLogin = (req, res, next) => {
 
 exports.login = (req, res, next) => {
     userModel.loging(req).then((result) => {
-        req.session.userId = result.id;
-        req.session.isAdmin = result.isAdmin;
+        req.session.userId = String(result.user._id);
+        req.session.name = result.user.username;
+        req.session.image = result.user.image;
         res.redirect('/');
     }).catch((err) => {
         req.flash('authErr', err);

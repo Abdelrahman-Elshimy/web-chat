@@ -8,6 +8,7 @@ const SessionStore = require('connect-mongodb-session')(session);
 // routes
 const AuthRoutes = require('./routes/auth.routes');
 const ProfileRoutes = require('./routes/profile.routes');
+const FriendRoutes = require('./routes/friend.routes');
 
 const app = express();
 app.use(express.static(path.join(__dirname, 'assets')));
@@ -32,6 +33,7 @@ app.use(flash());
 
 app.use(AuthRoutes);
 app.use("/profile", ProfileRoutes);
+app.use("/friend", FriendRoutes);
 
 
 app.use((req, res, next) => {

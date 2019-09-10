@@ -19,15 +19,26 @@
                 <h3> <%=username %></h3>
             </div>
             <% if (!isOwner) { %>
+
+
+            <form method="post">
+                <input type="hidden" name="myId" value="<%= myId %>">
+                <input type="hidden" name="myName" value="<%= myName %>">
+                <input type="hidden" name="myImage" value="<%= myImage %>">
+                <input type="hidden" name="friendId" value="<%= id %>">
+                <input type="hidden" name="friendName" value="<%= username %>">
+                <input type="hidden" name="friendImage" value="<%= image %>">
                 <% if (isFriends) { %>
-                is friends
+                    <input type="submit" value="Delete Friend" class="btn btn-danger" formaction="/friend/delete">
                 <% } else if ( isRequestSent ) {%>
-                request sent
+                    <input type="submit" value="Cancel Request" class="btn btn-danger" formaction="/friend/cancel">
                 <% } else if ( isRequestRecieved ) {%>
-                request recieved
+                    <input type="submit" value="Accept" class="btn btn-success" formaction="/friend/accept">
+                    <input type="submit" value="Reject" class="btn btn-danger" formaction="/friend/reject">
                 <% } else { %>
-                    add
+                    <input type="submit" value="Add Friend" class="btn btn-primary" formaction="/friend/add">
                 <% } %>
+            </form>
             <% }  %>
         </div>
     </div>

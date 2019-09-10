@@ -1,0 +1,94 @@
+<!-- include head  -->
+<%- include('incs/header.ejs') %>
+
+<!-- include navbar  -->
+<%- include('incs/navbar.ejs') %>
+<!-- Write content of page  -->
+
+<section class="signup text-center m-auto" style="max-width: 500px;">
+    <div class="container">
+        <img src="ouch-eastwood-sign-in.png" alt="login">
+    </div>
+    <div class="container mt-2">
+
+        <form action="/signup" method="POST">
+            <div class="form-group mb-2">
+                <input type="text" name="username" placeholder="Username"  class="form-control">
+            </div>
+            <% if (typeof valids !== 'undefined') { %>
+                <% let userError = valids.find(err => err.param === 'username') %> 
+                <% if(userError) { %>
+                    <p class="alert alert-danger">
+                        <%= userError.msg %>
+                    </p>
+                <% } %>
+
+                
+            <%  } %>
+
+            <div class="form-group mb-2">
+                <input type="email" name="email" placeholder="E-Mail"  class="form-control">
+            </div>
+            <% if (typeof valids !== 'undefined') { %>
+                <% let emailError = valids.find(err => err.param === 'email') %> 
+                <% if(emailError) { %>
+                    <p class="alert alert-danger">
+                        <%= emailError.msg %>
+                    </p>
+                <% } %>
+
+                
+            <%  } %>
+            <div class="form-group mb-2">
+                <input type="password" name="password" placeholder="Password"  class="form-control">
+            </div>
+            <% if (typeof valids !== 'undefined') { %>
+                <% let passwordError = valids.find(err => err.param === 'password') %> 
+                <% if(passwordError) { %>
+                    <p class="alert alert-danger">
+                        <%= passwordError.msg %>
+                    </p>
+                <% } %>
+
+                
+            <%  } %>
+            <div class="form-group mb-2">
+                <input type="password" name="confirmPassword" placeholder="Confirm Password" 
+                    class="form-control">
+            </div>
+            <% if (typeof valids !== 'undefined') { %>
+                <% let confirmPasswordError = valids.find(err => err.param === 'confirmPassword') %> 
+                <% if(confirmPasswordError) { %>
+                    <p class="alert alert-danger">
+                        <%= confirmPasswordError.msg %>
+                    </p>
+                <% } %>
+
+                
+            <%  } %>
+            <div class="form-group mb-2 mt-4">
+                <input type="submit" value="Create Account" class="btn btn-primary">
+            </div>
+        </form>
+        <!-- <% if (typeof valids !== 'undefined') { %>
+        <% if (valids.length > 0) { %>
+        <% for( let i =0; i < valids.length; i++) { %>
+        <p class="alert alert-danger"><%= valids[i].msg %></p>
+        <% } } }%> -->
+        <div class="d-flex justify-content-center">
+            <p>Already Have Account ? </p>
+            <p class="ml-1"><a href="/login"> Login</a></p>
+        </div>
+    </div>
+</section>
+
+
+
+
+<!-- end content of page  -->
+<!-- include footer  -->
+<%- include('incs/scripts.ejs') %>
+
+</body>
+
+</html>

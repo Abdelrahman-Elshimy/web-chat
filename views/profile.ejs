@@ -1,0 +1,40 @@
+<!-- include head  -->
+<%- include('incs/header.ejs') %>
+
+<!-- include navbar  -->
+<%- include('incs/navbar.ejs') %>
+<!-- Write content of page  -->
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col col-sm-4">
+            <div class="profile-image text-center">
+                <img src="/<%=image %>" width="200px" alt="profile image"
+                    style="border-radius: 50%;background: #eeeeee;">
+            </div>
+
+        </div>
+        <div class="col col-sm-8">
+            <div class="profile-name">
+                <h3> <%=username %></h3>
+            </div>
+            <% if (!isOwner) { %>
+                <% if (isFriends) { %>
+                is friends
+                <% } else if ( isRequestSent ) {%>
+                request sent
+                <% } else if ( isRequestRecieved ) {%>
+                request recieved
+                <% } else { %>
+                    add
+                <% } %>
+            <% }  %>
+        </div>
+    </div>
+</div>
+<!-- include footer  -->
+<%- include('incs/scripts.ejs') %>
+
+</body>
+
+</html>

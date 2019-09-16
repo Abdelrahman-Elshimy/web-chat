@@ -216,3 +216,16 @@ exports.deleteFriend = async (data) => {
         throw new Error(error);
     }
 }
+
+exports.getFriendRequests = async (id) => {
+    try {
+        await mongoose.connect(DB_URL, { useNewUrlParser: true })
+        let data = await userModel.findById(id, {friendRequests: true})
+        mongoose.disconnect();
+        return data;
+    } catch (error) {
+        mongoose.disconnect();
+        throw new Error(error);
+    }
+
+}

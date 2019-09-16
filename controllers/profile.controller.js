@@ -8,8 +8,9 @@ exports.getProfile = (req, res, next) => {
     userModel.getUser(req.params.id).then((user) => {
         res.render('profile', {
             pageTitle: user.username,
-            isUser: true,
+            isUser: req.session.userId,
             username: user.username,
+            friendRequests: req.friendRequests.friendRequests,
             image: user.image,
             id: req.params.id,
             myId: req.session.userId,
@@ -22,6 +23,5 @@ exports.getProfile = (req, res, next) => {
         });
     }).catch((err) => {
         res.send(err);
-        console.log('error');
     });
 }

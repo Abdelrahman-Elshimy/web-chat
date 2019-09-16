@@ -10,7 +10,6 @@ const userSchema = mongoose.Schema({
         type: String,
         default: "default.png"
     },
-    isOnline: { type: Boolean, default: false },
     friends: {
         type: [{ name: String, image: String, id: String }],
         default: []
@@ -229,3 +228,17 @@ exports.getFriendRequests = async (id) => {
     }
 
 }
+
+exports.getFriends = async (id) => {
+    try {
+        await mongoose.connect(DB_URL, { useNewUrlParser: true })
+        let data = await userModel.findById(id, {friends: true})
+        mongoose.disconnect();
+        return data.friends;
+    } catch (error) {
+        mongoose.disconnect();
+        throw new Error(error);
+    }
+
+}
+

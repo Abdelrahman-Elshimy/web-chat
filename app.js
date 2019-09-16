@@ -10,16 +10,16 @@ const socketIO = require('socket.io');
 const AuthRoutes = require('./routes/auth.routes');
 const ProfileRoutes = require('./routes/profile.routes');
 const FriendRoutes = require('./routes/friend.routes');
+const homeRoutes = require('./routes/home.routes');
 
 
 const app = express();
 const server = require('http').createServer(app);
 const io = socketIO(server);
 
-io.on('connection', (socket) => {
-    require('./sockets/init.socket')(socket);
-    require('./sockets/friend.socket')(io, socket);
-});
+io.onlineUsers = {}
+require('./sockets/init.socket')(io);
+require('./sockets/friend.socket')(io);
 app.use(express.static(path.join(__dirname, 'assets')));
 app.use(express.static(path.join(__dirname, 'images')));
 
@@ -46,7 +46,7 @@ app.use((req, res, next) => {
         }).catch((err) => {
             res.redirect("/error");
         });
-        
+
     } else {
         next();
     }
@@ -58,6 +58,7 @@ app.use(flash());
 app.use(AuthRoutes);
 app.use("/profile", ProfileRoutes);
 app.use("/friend", FriendRoutes);
+app.use(homeRoutes);
 
 
 

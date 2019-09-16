@@ -42,7 +42,7 @@
                                 <% if (isUser) { %>
                                 <% if (friendRequests.length !== 0) { %>
                                 <% for (let request of friendRequests) { %>
-                                    <a class="dropdown-item" href="<%= request.id %>"><%= request.name %></a>
+                                    <a class="dropdown-item" href="/profile/<%= request.id %>"><%= request.name %></a>
                                 <% } }  else {%>
                                     <span style="padding-left: 10px;">No Friend Requests</span>
                                 <% } }%>

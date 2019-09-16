@@ -1,8 +1,9 @@
 const socket = io();
-
+let id = document.getElementById('userId').value;
 socket.on('connect', () => {
-     let id = document.getElementById('userId').value;
+     
      socket.emit('joinNotificationsRoom', id);
+     socket.emit('goOnline', id);
 });
 socket.on('newFriendRequest', data => {
      const frienRequests = document.getElementById('frienRequests');

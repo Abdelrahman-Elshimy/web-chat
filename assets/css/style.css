@@ -1,0 +1,31 @@
+.chat-list {
+    padding: 0;
+    color: #eeeeee;
+    font-size: 17px;
+    overflow: scroll;
+}
+
+.chat-list .list-profile > div{ 
+    margin-bottom: 15px;
+    padding: 20px 15px;
+}
+.chat-list .list-profile > div.active {
+    background: #4977f0;
+}
+.messages-list {
+    box-shadow: 5px 5px 5px #eeeeee;
+    overflow: scroll;
+}
+.messages-list::-webkit-scrollbar, .chat-list::-webkit-scrollbar { display: none; }
+
+.list-messages > div.active {
+    background: #ffffff;
+}
+.list-messages h3 {
+    color: #666666;
+    font-size: 17px;
+}
+.list-messages span, .list-messages p {
+    color: #615B5C;
+    font-size: 15px;
+}

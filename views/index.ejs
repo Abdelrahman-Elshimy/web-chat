@@ -5,7 +5,102 @@
 <%- include('incs/navbar.ejs') %>
 <!-- Write content of page  -->
 
-<div class="container">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 chat-list" style="background: #6692FF; border-top: 1px solid #4977f0;">
+            <div class="list-profile">
+                <div class="d-flex justify-content-center mt-3" style="align-items: center;">
+                    <img src="/<%= image %>" class="img-responsive mr-3" alt="profile image" width="30px"
+                        style="background: #eeeeee; border-radius: 50%;">
+                    <div><%= username %></div>
+                </div>
+                <div class="d-flex active" style="align-items: center;">
+                    <img src="speech-bubble.png" class="img-responsive mr-3" alt="profile image" width="20px">
+                    <div>Messages</div>
+                </div>
+                <div class="d-flex" style="align-items: center;">
+                    <img src="profile.png" class="img-responsive mr-3" alt="profile image" width="20px">
+                    <div>Friends</div>
+                </div>
+                <div class="d-flex" style="align-items: center;">
+                    <img src="group-of-men.png" class="img-responsive mr-3" alt="profile image" width="20px">
+                    <div>Groups</div>
+                </div>
+                <div class="d-flex" style="align-items: center;">
+                    <img src="settings.png" class="img-responsive mr-3" alt="profile image" width="20px">
+                    <div>Settings</div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-3 chat-list messages-list" style="background: #f4f6fb;">
+            <div class="list-messages">
+                <div class="d-flex p-3">
+                    <img src="/<%= image %>" class="img-responsive mr-3" alt="profile image" width="30px" height="30px"
+                        style="background: #eeeeee; border-radius: 50%;">
+                    <div class="message-content">
+                        <h3>Abdelrahman Ahmed</h3>
+                        <span>09:50</span>
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veritatis, velit!</p>
+                    </div>
+                </div>
+                <div class="d-flex active p-3">
+                    <img src="/<%= image %>" class="img-responsive mr-3" alt="profile image" width="30px" height="30px"
+                        style="background: #eeeeee; border-radius: 50%;">
+                    <div class="message-content">
+                        <h3>Sayed Ahmed</h3>
+                        <span>09:50</span>
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veritatis, velit!</p>
+                    </div>
+                </div>
+                <div class="d-flex p-3">
+                    <img src="/<%= image %>" class="img-responsive mr-3" alt="profile image" width="30px" height="30px"
+                        style="background: #eeeeee; border-radius: 50%;">
+                    <div class="message-content">
+                        <h3>Hussien Ahmed</h3>
+                        <span>09:50</span>
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veritatis, velit!</p>
+                    </div>
+                </div>
+                <div class="d-flex p-3">
+                        <img src="/<%= image %>" class="img-responsive mr-3" alt="profile image" width="30px" height="30px"
+                            style="background: #eeeeee; border-radius: 50%;">
+                        <div class="message-content">
+                            <h3>Hussien Ahmed</h3>
+                            <span>09:50</span>
+                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veritatis, velit!</p>
+                        </div>
+                    </div>
+                    <div class="d-flex p-3">
+                            <img src="/<%= image %>" class="img-responsive mr-3" alt="profile image" width="30px" height="30px"
+                                style="background: #eeeeee; border-radius: 50%;">
+                            <div class="message-content">
+                                <h3>Hussien Ahmed</h3>
+                                <span>09:50</span>
+                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veritatis, velit!</p>
+                            </div>
+                        </div>
+                        <div class="d-flex p-3">
+                                <img src="/<%= image %>" class="img-responsive mr-3" alt="profile image" width="30px" height="30px"
+                                    style="background: #eeeeee; border-radius: 50%;">
+                                <div class="message-content">
+                                    <h3>Hussien Ahmed</h3>
+                                    <span>09:50</span>
+                                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veritatis, velit!</p>
+                                </div>
+                            </div>
+                            <div class="d-flex p-3">
+                                    <img src="/<%= image %>" class="img-responsive mr-3" alt="profile image" width="30px" height="30px"
+                                        style="background: #eeeeee; border-radius: 50%;">
+                                    <div class="message-content">
+                                        <h3>Hussien Ahmed</h3>
+                                        <span>09:50</span>
+                                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veritatis, velit!</p>
+                                    </div>
+                                </div>
+            </div>
+        </div>
+    </div>
     <div id="onlineFriends"></div>
 </div>
 
@@ -14,6 +109,7 @@
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/sockets/init.js"></script>
 <script src="/js/sockets/home.js"></script>
+<script src="/js/custom.js"></script>
 
 </body>
 

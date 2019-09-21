@@ -1,8 +1,8 @@
+
 .chat-list {
     padding: 0;
     color: #eeeeee;
     font-size: 17px;
-    overflow: scroll;
 }
 
 .chat-list .list-profile > div{ 
@@ -13,11 +13,29 @@
     background: #4977f0;
 }
 .messages-list {
-    box-shadow: 5px 5px 5px #eeeeee;
-    overflow: scroll;
+    overflow: hidden;
+    transition: all .5s ease-in-out;
 }
-.messages-list::-webkit-scrollbar, .chat-list::-webkit-scrollbar { display: none; }
-
+.messages-list::-webkit-scrollbar,
+.messages-list-friend::-webkit-scrollbar {
+    width: 6px;
+} 
+.messages-list:hover,
+.messages-list-friend:hover {
+    overflow-y: scroll;
+}
+.messages-list::-webkit-scrollbar-thumb,
+.messages-list-friend::-webkit-scrollbar-thumb {
+    background: #aaaaaa; 
+    border-radius: 10px;
+    cursor: pointer;
+}
+.messages-list::-webkit-scrollbar-track,
+.messages-list-friend::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+    cursor: pointer;
+}
 .list-messages > div.active {
     background: #ffffff;
 }
@@ -25,7 +43,70 @@
     color: #666666;
     font-size: 17px;
 }
+
 .list-messages span, .list-messages p {
     color: #615B5C;
     font-size: 15px;
+}
+.messages-list-friend {
+    overflow: hidden;
+    color: #aaaaaa;
+  
+    padding-bottom: 50px;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 10px;
+}
+.messages-list-friend .search-chat{
+    position: relative;
+    height: 40px;
+    margin-top: 20px;
+    width: 40%;
+
+}
+.messages-list-friend .search-chat img {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 10px;
+    right: 15px;
+}
+.messages-list-friend .search-chat input {
+    height: 100%;
+    width: 100%;
+    border: none;
+    background: #f3f5fd;
+    border-radius: 50px;
+    color: #C4CBF1;
+    padding: 0px 15px;
+    /* padding: 15px 30px; */
+}
+.messages-list-friend .search-chat input::placeholder {
+    color: #C4CBF1;
+}
+.messages-list-friend .message-content {
+    box-shadow: 2px 2px 2px 2px #eeeeee;
+    padding: 10px 20px;
+    border-radius: 5px;
+    max-width: 80%;
+}
+
+.send-message {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #ffffff;
+    
+}
+.send-message input {
+    border: none;
+    background: #ffffff;
+    padding: 10px 30px;
+    width: 30%;
+}
+.send-message button {
+    padding: 10px 30px;
+    border: none;
+    background: #4977f0;
+    color: #ffffff;
 }
